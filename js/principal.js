@@ -4,38 +4,45 @@
         let titulo = document.querySelector(".titulo"); //declarei o trecho de código como uma variavel
         titulo.textContent = "Bem Estar - Nutrição"
         
-        var paciente = document.querySelector("#primeiro-paciente"); // # para buscar ID
+        var pacientes = document.querySelectorAll(".paciente"); // # para buscar ID
         
-        var tdPeso = paciente.querySelector(".info-peso"); // .  para buscar class
-        var tdAltura = paciente.querySelector(".info-altura");
+        for(let i = 0; i < pacientes.length; i++){ //loop FOR usado para transcorrer meu trecho de código
+                        
+                let paciente = pacientes[i];
 
-        var peso = tdPeso.textContent;
-        var altura = tdAltura.textContent;
+                var tdPeso = paciente.querySelector(".info-peso"); // .  para buscar class
+                var tdAltura = paciente.querySelector(".info-altura");
 
-        /*console.log(paciente); //tr
-        console.log(tdPeso); //td que tem o peso
-        console.log(peso);  //Obter o peso de Pedro
-        console.log(altura); //Obter a altura de Pedro */
+                var peso = tdPeso.textContent;
+                var altura = tdAltura.textContent;
 
-       let tdImc = paciente.querySelector(".info-imc"); //peguei o valor do IMC
-       
-       let pesoEhvalido = true;
-       let alturaEhvalida = true;
+                        /*console.log(paciente); //tr
+                        console.log(tdPeso); //td que tem o peso
+                        console.log(peso);  //Obter o peso de Pedro
+                        console.log(altura); //Obter a altura de Pedro */
 
-       if( peso <= 0 || peso >= 1000){
-                console.log("Peso invalido")
-                pesoEhvalido = false; //condição para não seguir o calculo do IMC com valores incompativeis
-                tdImc.textContent = "Peso inválido!"
-        }       
-       
-       if( altura <= 0.30 || altura >= 2.80){
-        console.log("Altura invalida")
-        alturaEhvalida =false;
-        tdImc.textContent = "Altura inválida!"
-        }
+                let tdImc = paciente.querySelector(".info-imc"); //peguei o valor do IMC
+                
+                let pesoEhvalido = true;
+                let alturaEhvalida = true;
 
-        if(pesoEhvalido && alturaEhvalida){
-                let imc = peso / (altura * altura);
-                tdImc.textContent = imc;
+                if( peso <= 0 || peso >= 1000){
+                                console.log("Peso invalido");
+                                pesoEhvalido = false; //condição para não seguir o calculo do IMC com valores incompativeis
+                                tdImc.textContent = "Peso inválido!";
+                                paciente.classList.add("paciente-invalido");
+                                //No JS utilizasse camel case para duas palavras e nao background-color
+                        }       
+                
+                if( altura <= 0.30 || altura >= 2.80){
+                        console.log("Altura invalida");
+                        alturaEhvalida =false;
+                        tdImc.textContent = "Altura inválida!";
+                        paciente.classList.add("paciente-invalido");
+                        }
 
+                        if(pesoEhvalido && alturaEhvalida){
+                                let imc = peso / (altura * altura);
+                                tdImc.textContent = imc.toFixed(2); //toFIxed função para mostrar apenas 2 casas decimais
+                }
         }
